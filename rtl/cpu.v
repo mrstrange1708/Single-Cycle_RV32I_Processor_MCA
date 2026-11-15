@@ -12,11 +12,13 @@ module cpu (
     wire [2:0]  alu_ctrl;
 
     // ---- Next-PC logic ----
-    // TODO: pc_plus4  = current PC + 4
-    // TODO: pc_branch = current PC + imm
-    // TODO: pc_src    = 1 when this is a branch AND the condition holds
-    //        (BEQ: zero is 1.  BNE: zero is 0.  instr[12] tells them apart)
-    // TODO: pc_next   = pc_branch if pc_src else pc_plus4
+    // Two separate adders: the ALU is busy comparing rs1 - rs2 during a branch,
+    // so the branch target needs its own adder.
+    assign pc_plus4  = pc_cur + 32'd4;
+    assign pc_branch = pc_cur + imm;
+    // instr[12] is funct3[0]: 0 = BEQ (branch when zero), 1 = BNE (branch when not zero)
+    assign pc_src    = branch & (instr[12] ? ~zero : zero);
+    assign pc_next   = pc_src ? pc_branch : pc_plus4;
 
     // ---- Blocks ----
     pc u_pc (.clk(clk), .reset(reset), .pc_next(pc_next), .pc(pc_cur));   // done as an example

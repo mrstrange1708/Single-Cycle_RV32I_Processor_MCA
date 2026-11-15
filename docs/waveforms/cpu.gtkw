@@ -1,0 +1,74 @@
+[*] Member 5 CPU view: Full-Processor Program A Execution Trace.
+[*] Supply sim/cpu.vcd on the GTKWave command line.
+[timestart] 0
+[size] 1920 1080
+[pos] -1 -1
+*-18.000000 150000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_cpu.
+[treeopen] tb_cpu.dut.
+[treeopen] tb_cpu.dut.u_rf.
+[sst_width] 220
+[signals_width] 260
+[sst_expanded] 1
+[sst_vpaned_height] 300
+@28
+[color] 2
+tb_cpu.clk
+[color] 3
+tb_cpu.reset
+@22
+[color] 1
+tb_cpu.dut.pc_cur[31:0]
+[color] 1
+tb_cpu.dut.instr[31:0]
+@28
+[color] 5
+tb_cpu.dut.reg_write
+[color] 5
+tb_cpu.dut.alu_src
+[color] 5
+tb_cpu.dut.mem_write
+[color] 5
+tb_cpu.dut.result_src
+[color] 5
+tb_cpu.dut.branch
+[color] 5
+tb_cpu.dut.pc_src
+@22
+[color] 6
+tb_cpu.dut.rd1[31:0]
+[color] 6
+tb_cpu.dut.rd2[31:0]
+[color] 6
+tb_cpu.dut.imm[31:0]
+[color] 6
+tb_cpu.dut.alu_b[31:0]
+@28
+[color] 7
+tb_cpu.dut.alu_ctrl[2:0]
+@22
+[color] 4
+tb_cpu.dut.alu_result[31:0]
+@28
+[color] 7
+tb_cpu.dut.zero
+@22
+[color] 2
+tb_cpu.dut.mem_rdata[31:0]
+[color] 3
+tb_cpu.dut.result[31:0]
+@24
+[color] 6
+tb_cpu.dut.u_rf.regs[1][31:0]
+[color] 6
+tb_cpu.dut.u_rf.regs[2][31:0]
+[color] 6
+tb_cpu.dut.u_rf.regs[3][31:0]
+[color] 6
+tb_cpu.dut.u_rf.regs[4][31:0]
+[color] 6
+tb_cpu.dut.u_rf.regs[8][31:0]
+[color] 6
+tb_cpu.dut.u_rf.regs[9][31:0]
+[color] 6
+tb_cpu.dut.u_rf.regs[11][31:0]

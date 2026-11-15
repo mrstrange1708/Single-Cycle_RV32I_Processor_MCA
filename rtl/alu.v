@@ -8,6 +8,14 @@ module alu (
     output reg [31:0] result,
     output           zero
 );
-    // TODO: ADD, SUB, AND, OR, XOR; unused control codes return zero.
+    // Arithmetic wraps to 32 bits, including two's-complement subtraction.
+    always @(*) begin
+        case (alu_ctrl)
+            3'b000: result = a + b;
+            3'b001: result = a - b;
+            // TODO: add the three bitwise operations.
+            default: result = 32'b0;
+        endcase
+    end
     // TODO: assert zero exactly when result is zero.
 endmodule

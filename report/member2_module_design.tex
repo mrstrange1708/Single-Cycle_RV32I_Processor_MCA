@@ -1,0 +1,6 @@
+% Insert in Proposed Solution -> Module Design.
+The ALU is a combinational module with two 32-bit operands and a 3-bit
+operation selector supporting ADD, SUB, AND, OR, and XOR. Arithmetic
+retains the low 32 bits; unused selector codes produce zero, and every
+case assigns the result to avoid a latch. A zero output indicates a zero
+result, allowing the top-level branch logic to test equality after SUB.

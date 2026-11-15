@@ -1,0 +1,34 @@
+% Insert inside the shared Literature Review section; Member 3 adds core/datapath studies.
+% Merge member2_references.bib into the team's bibliography without duplicating keys.
+\subsection{RISC Principles and the RISC-V ISA}
+Reduced instruction set computer designs use regular instructions and a
+load/store organization to make processor implementations easier to reason
+about. RV32I follows this organization: arithmetic operates on registers,
+while load and store instructions transfer data between registers and memory.
+Its base instructions are 32 bits long, and source and destination register
+fields occupy consistent positions across formats to simplify decoding.
+RV32I provides 32 registers of 32 bits each, with register x0 fixed at
+zero~\cite{riscv_unpriv_2026}.
+
+Asanovi\'{c} and Patterson argue that an instruction set is an interface
+specification, distinct from a particular processor implementation. Their
+case for an open ISA emphasizes research, education, and a small base
+instruction set with optional extensions~\cite{asanovic_patterson_2014}.
+This distinction permits different microarchitectures to implement the
+same instruction semantics; selecting RISC-V does not itself require a
+single-cycle datapath.
+
+The current RV32I specification defines ADD and SUB as operations whose
+low 32 result bits are retained, with arithmetic overflow ignored. AND, OR,
+and XOR operate bitwise. BEQ and BNE compare registers for equality and
+inequality, respectively~\cite{riscv_unpriv_2026}. These semantics motivate
+the project's 32-bit ALU and its subtraction-based equality check. The
+ALU's zero signal is an internal datapath connection, rather than an
+architectural condition-code register.
+
+The educational need addressed here is a small, inspectable implementation
+that connects instruction semantics to modular RTL and repeatable tests.
+The project targets ten instructions: ADD, SUB, AND, OR, XOR, ADDI, LW,
+SW, BEQ, and BNE. This is a teaching subset of RV32I; it does not claim
+complete RV32I conformance. Member 3's review of existing datapaths and
+cores should complete the comparison with prior implementations.

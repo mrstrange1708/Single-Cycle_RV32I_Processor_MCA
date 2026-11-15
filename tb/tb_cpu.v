@@ -11,6 +11,38 @@ module tb_cpu;
         .reset(reset)
     );
 
+    // Architectural probe wires for waveform visualization and GTKWave inspection
+    wire [31:0] pc_cur     = dut.pc_cur;
+    wire [31:0] instr      = dut.instr;
+    wire        reg_write  = dut.reg_write;
+    wire        alu_src    = dut.alu_src;
+    wire        mem_write  = dut.mem_write;
+    wire        result_src = dut.result_src;
+    wire        branch     = dut.branch;
+    wire        pc_src     = dut.pc_src;
+    wire [2:0]  alu_ctrl   = dut.alu_ctrl;
+    wire [31:0] rd1        = dut.rd1;
+    wire [31:0] rd2        = dut.rd2;
+    wire [31:0] imm        = dut.imm;
+    wire [31:0] alu_result = dut.alu_result;
+    wire        zero       = dut.zero;
+    wire [31:0] mem_rdata  = dut.mem_rdata;
+    wire [31:0] result     = dut.result;
+
+    // Register probe wires
+    wire [31:0] x1  = dut.u_rf.regs[1];
+    wire [31:0] x2  = dut.u_rf.regs[2];
+    wire [31:0] x3  = dut.u_rf.regs[3];
+    wire [31:0] x4  = dut.u_rf.regs[4];
+    wire [31:0] x5  = dut.u_rf.regs[5];
+    wire [31:0] x6  = dut.u_rf.regs[6];
+    wire [31:0] x7  = dut.u_rf.regs[7];
+    wire [31:0] x8  = dut.u_rf.regs[8];
+    wire [31:0] x9  = dut.u_rf.regs[9];
+    wire [31:0] x10 = dut.u_rf.regs[10];
+    wire [31:0] x11 = dut.u_rf.regs[11];
+    wire [31:0] dmem0 = dut.u_dm.mem[0];
+
     // 100 MHz clock generation (10 ns period, 50% duty cycle)
     always #5 clk = ~clk;
 

@@ -27,4 +27,9 @@ cat cpu_test_b.log
 
 # Restore default program.hex to test_all.hex
 cp "$repo_dir/programs/test_all.hex" program.hex
+
+if python3 -c "import PIL" >/dev/null 2>&1; then
+    python3 "$repo_dir/tb/generate_waveform_png.py"
+fi
+
 echo "All CPU tests passed successfully!"

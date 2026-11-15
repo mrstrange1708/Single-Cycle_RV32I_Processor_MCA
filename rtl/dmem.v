@@ -9,8 +9,21 @@ module dmem (
     output [31:0] rd
 );
     reg [31:0] mem [0:63];  // 64 words = 256 bytes
+    integer i;
 
-    // TODO 1: start all words at 0
-    // TODO 2: on the rising clock edge, if we is 1, store wd at word addr / 4
-    // TODO 3: rd always shows the word at addr / 4 (no clock)
+    // Zero-initialize memory for simulation
+    initial begin
+        for (i = 0; i < 64; i = i + 1)
+            mem[i] = 32'b0;
+    end
+
+    // Synchronous write on rising clock edge when write enable (we) is asserted
+    always @(posedge clk) begin
+        if (we)
+            mem[addr[7:2]] <= wd;
+    end
+
+    // Asynchronous / combinational read: data is available instantly
+    assign rd = mem[addr[7:2]];
+
 endmodule

@@ -40,8 +40,23 @@ module control (
         endcase
     end
 
-    // TODO 2 (ALU decoder): case on alu_op:
-    //   00 -> add | 01 -> sub | 11 -> add (ADDI)
-    //   10 -> look at funct3 (and funct7_5 for ADD vs SUB)
-    //   alu_ctrl codes: 000 add, 001 sub, 010 and, 011 or, 100 xor
+    // ALU decoder: alu_op (+ funct3, funct7_5 for R-type) -> alu_ctrl.
+    // Shared codes: 000 add, 001 sub, 010 and, 011 or, 100 xor.
+    // ADDI has its own alu_op (11) so funct7_5 is never read for it:
+    // in an I-type instruction bit 30 is part of the immediate.
+    always @(*) begin
+        case (alu_op)
+            2'b00: alu_ctrl = 3'b000;                                 // add: LW/SW address
+            2'b01: alu_ctrl = 3'b001;                                 // sub: BEQ/BNE compare
+            2'b11: alu_ctrl = 3'b000;                                 // add: ADDI
+            2'b10: case (funct3)                                      // R-type
+                       3'b000:  alu_ctrl = funct7_5 ? 3'b001 : 3'b000;   // SUB : ADD
+                       3'b111:  alu_ctrl = 3'b010;                    // AND
+                       3'b110:  alu_ctrl = 3'b011;                    // OR
+                       3'b100:  alu_ctrl = 3'b100;                    // XOR
+                       default: alu_ctrl = 3'b000;
+                   endcase
+            default: alu_ctrl = 3'b000;
+        endcase
+    end
 endmodule

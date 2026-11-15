@@ -1,0 +1,9 @@
+% ==============================================================================
+% Section: Proposed Solution -> Module Design (Memory Subsystem)
+% Owner: Member 5 (Balanagu Srikar) - Memory & Verification
+% ==============================================================================
+
+\noindent\textbf{Memory Subsystem (\texttt{imem.v}, \texttt{dmem.v}):} 
+The processor implements a modified Harvard memory architecture with isolated instruction and data address spaces, preventing structural memory hazards during single-cycle \texttt{LW} execution. 
+Instruction memory (\texttt{imem}) is a 64-word (256-byte) read-only asynchronous array populated at simulation initialization via \texttt{\$readmemh}. Instructions are indexed by discarding the lower two byte-offset bits (\texttt{addr[7:2]}). 
+Data memory (\texttt{dmem}) provides 64 words of read/write storage, featuring combinational asynchronous read access for single-cycle load writeback and synchronous clock-edge writing conditioned upon the write enable (\texttt{we}) signal.

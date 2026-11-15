@@ -1,0 +1,37 @@
+% ==============================================================================
+% Section: Proposed Solution -> Verification Plan
+% Owner: Member 5 (Balanagu Srikar) - Memory & Verification
+% ==============================================================================
+
+\subsection{Verification Plan}
+\label{sec:verification}
+
+Processor verification employed a layered, self-checking simulation methodology executed in Icarus Verilog and visualized using GTKWave. Testing progressed from unit-level module validation to full-datapath architectural verification under realistic machine code execution.
+
+\subsubsection{Hierarchical Test Strategy}
+The verification flow comprises two primary phases:
+\begin{enumerate}
+    \item \textbf{Unit Testbenches:} Independent self-checking harnesses for isolated modules: the Arithmetic Logic Unit (\texttt{tb\_alu.v}), the 32-register file (\texttt{tb\_regfile.v}), and the dual-stage control unit (\texttt{tb\_control.v}). Each unit test bench systematically applied exhaustive or randomized vectors checking boundary values, such as zero-register protection in \texttt{regfile} and arithmetic flags in \texttt{alu}.
+    \item \textbf{Integrated System Testbenches:} The top-level testbenches (\texttt{tb\_cpu.v} and \texttt{tb\_cpu\_loop.v}) instantiate the integrated processor datapath alongside instruction and data memory memories, verifying cycle-by-cycle signal propagation, control hazard resolution, and architectural register-memory consistency.
+\end{enumerate}
+
+\subsubsection{Program A: Complete ISA Coverage Benchmark}
+To guarantee complete coverage of the 10 target instructions within the RV32I base integer specification, \textbf{Program A} executes each instruction format in an interdependent operational sequence:
+\begin{itemize}
+    \item \textbf{Initialization:} \texttt{ADDI} populates baseline operands ($x_1 = 5, x_2 = 3$).
+    \item \textbf{R-Type Arithmetic and Logic:} \texttt{ADD}, \texttt{SUB}, \texttt{AND}, \texttt{OR}, and \texttt{XOR} execute in succession, writing results into destination registers $x_3$ through $x_7$.
+    \item \textbf{Data Memory Load/Store Round-Trip:} \texttt{SW} persists the value of $x_3$ (8) to memory address $0\times00$; \texttt{LW} retrieves the stored word into $x_8$, verifying single-cycle read-after-write coherence between memory and register writeback.
+    \item \textbf{Conditional Control Flow:} \texttt{BEQ} compares equal registers ($x_3 == x_8 == 8$), taking a $+8$-byte forward branch to bypass an invalidation instruction ($x_9 \leftarrow 1$). Subsequently, \texttt{BNE} evaluates unequal registers ($x_1 \neq x_2$), taking another $+8$-byte forward branch past $x_{10} \leftarrow 1$.
+    \item \textbf{Terminal State:} Execution concludes at target register $x_{11} \leftarrow 42$ before entering an idle self-loop (\texttt{BEQ} $x_0, x_0, 0$).
+\end{itemize}
+The automated harness verifies all architectural registers and memory locations against golden reference values, guaranteeing zero false passes.
+
+\subsubsection{Program B: Iterative Accumulation Benchmark}
+\textbf{Program B} computes the sum of the series $\sum_{i=1}^{5} i = 15$ over 19 executed instructions. This test specifically exercises:
+\begin{itemize}
+    \item Backward branch execution using a negative two's-complement immediate offset ($-8$ bytes via \texttt{BNE}).
+    \item Repeated synchronous register writeback and asynchronous dual-port reading across iterative loop states.
+    \item Word-aligned data memory storage with non-zero offset addressing (\texttt{SW} $x_1, 4(x_0)$).
+\end{itemize}
+
+Waveform dumps in Value Change Dump (\texttt{.vcd}) format were analyzed to inspect control path timing, hazard-free multiplexer selection, and memory read/write synchronization.

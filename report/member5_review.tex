@@ -1,0 +1,43 @@
+% Standalone IEEE-format review copy of Member 5's contribution only.
+% Member 1 assembles the complete team report in Overleaf.
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{booktabs}
+
+\begin{document}
+\title{Member 5 Contribution Preview: Memory Subsystem and Full-Processor Verification}
+\author{\IEEEauthorblockN{Member 5: Balanagu Srikar}}
+\maketitle
+
+\begin{center}
+\footnotesize Review copy containing only the assigned Member 5 material for the MCA Single-Cycle RV32I Processor project.
+\end{center}
+
+\section{Module Design}
+\input{member5_module_design}
+The memory design adheres to the RISC-V Unprivileged ISA specification \cite{riscvspec2019} and follows established microarchitecture methodologies outlined by Patterson and Hennessy \cite{patterson2020computer} and Harris and Harris \cite{harris2021digital}. Verilog modeling conforms to IEEE Std 1364-2005 \cite{ieee1364verilog}.
+
+\section{Proposed Solution: Verification Plan}
+\input{member5_verification_plan}
+
+\section{Individual Contributions}
+\begin{table}[htbp]
+\centering
+\caption{Member 5 Individual Contribution}
+\begin{tabular}{lp{3.1cm}p{3.2cm}}
+\toprule
+Member & Modules & Report sections \\
+\midrule
+Member 5 & Instruction Memory (\texttt{imem.v}), Data Memory (\texttt{dmem.v}), Assembly/Hex Test Programs, Full-CPU Testbenches & Verification Plan, Memory Subsystem Design, References, Video Demo Assembly \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Verification Summary and Artifacts}
+All ten required RV32I instructions were verified using self-checking testbenches (\texttt{tb\_cpu.v} and \texttt{tb\_cpu\_loop.v}). Program A verified single-cycle arithmetic, logic, load/store memory round-trip, and forward conditional branch behavior with zero discrepancies. Program B verified 5 iterations of an accumulation loop using backward conditional branching with negative displacement, completing in 19 instructions. Both tests pass automatically in Icarus Verilog with zero errors. VCD traces and GTKWave captures in \texttt{docs/waveforms/cpu.png} provide comprehensive timing and architectural evidence.
+
+\bibliographystyle{IEEEtran}
+\bibliography{member5_references}
+
+\end{document}

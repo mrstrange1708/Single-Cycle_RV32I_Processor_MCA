@@ -11,12 +11,6 @@ Recreate the trace and open the view from the repository root:
 gtkwave sim/alu.vcd docs/waveforms/alu.gtkw docs/waveforms/alu.rc
 ```
 
-On this Mac, GTKWave 3.3.116 was built from the official tagged source using
-Homebrew GTK3/Quartz because the Homebrew GTKWave package is unavailable.
-Use `~/.local/bin/gtkwave` in place of `gtkwave` if it is not on PATH.
-The local build disables Tcl, XZ compression, and unsupported X11 embedding;
-none of these features are needed to view the ALU's VCD file.
-
 The trace's timescale is 1 ps; the examples below are expressed in ns.
 The first seven vectors are the playbook's required examples:
 

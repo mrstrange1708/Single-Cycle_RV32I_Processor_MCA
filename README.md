@@ -34,7 +34,7 @@ tb/         testbenches        (tb_alu.v tb_regfile.v tb_control.v tb_cpu.v tb_c
 programs/   test programs      (test_all.s/.hex = Program A, sum_loop.s/.hex = Program B)
 sim/        run simulations here (outputs are not committed)
 docs/       datapath.png, control_table.md, waveforms/ screenshots per module
-report/     LaTeX section fragments per member, references (.bib), final report.pdf
+report/     main.tex + section fragments, references (.bib), report.pdf
 ```
 
 ## Test programs
@@ -108,6 +108,6 @@ git push
 - [x] Program A passes on the full CPU
 - [x] Program B (loop) passes on the full CPU
 - [x] Datapath diagram, control table and waveform screenshots in docs/
-- [ ] Report PDF (report/report.pdf)
+- [x] Report PDF (report/report.pdf, built from report/main.tex)
 - [ ] Demo video link
 - [ ] Synthesis results (Phase II)

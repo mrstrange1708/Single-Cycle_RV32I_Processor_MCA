@@ -13,9 +13,12 @@ module alu (
         case (alu_ctrl)
             3'b000: result = a + b;
             3'b001: result = a - b;
-            // TODO: add the three bitwise operations.
+            3'b010: result = a & b;
+            3'b011: result = a | b;
+            3'b100: result = a ^ b;
             default: result = 32'b0;
         endcase
     end
-    // TODO: assert zero exactly when result is zero.
+    // cpu.v uses this flag after SUB to decide BEQ/BNE.
+    assign zero = (result == 32'b0);
 endmodule

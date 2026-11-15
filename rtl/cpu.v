@@ -20,14 +20,26 @@ module cpu (
     assign pc_src    = branch & (instr[12] ? ~zero : zero);
     assign pc_next   = pc_src ? pc_branch : pc_plus4;
 
-    // ---- Blocks ----
-    pc u_pc (.clk(clk), .reset(reset), .pc_next(pc_next), .pc(pc_cur));   // done as an example
-    // TODO: imem    u_im  -> addr from pc_cur, gives instr
-    // TODO: control u_cu  -> opcode = instr[6:0], funct3 = instr[14:12], funct7_5 = instr[30]
-    // TODO: regfile u_rf  -> rs1 = instr[19:15], rs2 = instr[24:20], rd = instr[11:7], wd = result
-    // TODO: immgen  u_ig  -> from instr and imm_sel
-    // TODO: alu_b mux     -> imm when alu_src is 1, otherwise rd2
-    // TODO: alu     u_alu -> a = rd1, b = alu_b
-    // TODO: dmem    u_dm  -> addr = alu_result, write data = rd2, we = mem_write
-    // TODO: result mux    -> mem_rdata when result_src is 1, otherwise alu_result
+    // ---- Blocks (all ports connected by name, never by position) ----
+    // Fetch
+    pc      u_pc  (.clk(clk), .reset(reset), .pc_next(pc_next), .pc(pc_cur));
+    imem    u_im  (.addr(pc_cur), .instr(instr));
+
+    // Decode: control signals + register reads + immediate
+    control u_cu  (.opcode(instr[6:0]), .funct3(instr[14:12]), .funct7_5(instr[30]),
+                   .reg_write(reg_write), .alu_src(alu_src), .mem_write(mem_write),
+                   .result_src(result_src), .branch(branch), .imm_sel(imm_sel), .alu_ctrl(alu_ctrl));
+    regfile u_rf  (.clk(clk), .we(reg_write), .rs1(instr[19:15]), .rs2(instr[24:20]),
+                   .rd(instr[11:7]), .wd(result), .rd1(rd1), .rd2(rd2));
+    immgen  u_ig  (.instr(instr), .imm_sel(imm_sel), .imm(imm));
+
+    // Execute: ALUSrc mux picks rs2 (R-type, branches) or the immediate (ADDI, LW, SW)
+    assign alu_b = alu_src ? imm : rd2;
+    alu     u_alu (.a(rd1), .b(alu_b), .alu_ctrl(alu_ctrl), .result(alu_result), .zero(zero));
+
+    // Memory: address from the ALU, store data from rs2
+    dmem    u_dm  (.clk(clk), .we(mem_write), .addr(alu_result), .wd(rd2), .rd(mem_rdata));
+
+    // Write back: ResultSrc mux picks memory data (LW) or the ALU result
+    assign result = result_src ? mem_rdata : alu_result;
 endmodule

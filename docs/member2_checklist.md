@@ -31,7 +31,8 @@ Only Member 2's RTL, tests, and supporting documents were changed.
 
 ## Submission and team-dependent items
 
-- [ ] Record your own name/voice for the 0:55–1:50 segment and give it to
+- [ ] Demo recording (deferred by the user): record your own name/voice for
+  the 0:55–1:50 segment and give it to
   Member 5 for the final team video. The script is ready; a personal recording
   has not been created or represented as complete.
 - [ ] Merge these fragments into the shared IEEE report with Members 1/3/5.
@@ -42,13 +43,15 @@ Only Member 2's RTL, tests, and supporting documents were changed.
   and testbench. The existing CPU connects the ALU using the agreed ports.
 - [ ] Actual Phase II CPI/cycle-count/time table: collect the executed
   instruction traces and Member 1's Vivado Fmax before filling measured values.
-- [ ] GitHub publication and attribution: check the final commit on GitHub
-  after pushing; local Git configuration alone does not verify GitHub attribution.
+- [x] GitHub publication and attribution: Member 2's staged commits were
+  pushed to `origin/main`, and the remote history was verified. GitHub links
+  their authors to `Smanikanta21`; confirm this is the account to use for
+  Member 2's course contribution record.
 
 The guide requests four or more staged commits. Your latest instruction
 confirms that sequence: skeletons, ADD/SUB, bitwise operations and zero,
 passing testbench, written materials, and final evidence. The pre-existing
-Member 1 history is preserved. GitHub publication remains a separate step.
+Member 1 history is preserved. GitHub publication is complete.
 
 ## Reproduce the checks
 

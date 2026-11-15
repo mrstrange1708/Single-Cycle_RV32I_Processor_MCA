@@ -1,0 +1,11 @@
+# simulation outputs (run in sim/, never committed)
+sim/*
+!sim/.gitkeep
+*.vcd
+*.out
+cpu_sim
+alu_sim
+# Vivado (Phase II)
+.Xil/
+*.jou
+*.log

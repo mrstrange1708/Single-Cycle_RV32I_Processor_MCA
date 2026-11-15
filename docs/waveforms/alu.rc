@@ -1,0 +1,7 @@
+splash_disable on
+initial_window_x 1280
+initial_window_y 560
+fontname_signals Menlo 13
+fontname_waves Menlo 12
+use_fat_lines on
+zoom_pow10_snap off

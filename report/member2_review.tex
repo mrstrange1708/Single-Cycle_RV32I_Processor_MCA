@@ -1,0 +1,29 @@
+% Standalone IEEE-format review copy of Member 2's contribution only.
+% Member 1 still assembles the complete team report.
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{url}
+\begin{document}
+\title{Member 2 Contribution Preview: ALU and RISC-V Literature Review}
+\author{\IEEEauthorblockN{Member 2}}
+\maketitle
+\begin{center}
+\footnotesize Review copy containing only the assigned Member 2 material.
+\end{center}
+\section{Literature Review}
+\input{member2_literature_review}
+\section{Module Design}
+\input{member2_module_design}
+\section{ALU Verification Evidence}
+The self-checking unit testbench passed 542 vectors: 30 directed cases and
+512 exhaustive combinations of operands 0--7 across all eight control
+codes. Each vector checks both result and zero, including two's-complement
+negative subtraction, arithmetic wraparound, and unused control codes.
+A deliberately broken zero flag was rejected with a nonzero exit status.
+The VCD trace and GTKWave screenshot provide the corresponding waveform
+evidence. These results establish ALU behavior; full CPU program execution
+and synthesized timing remain dependent on the other team modules and
+their verification.
+\bibliographystyle{IEEEtran}
+\bibliography{member2_references}
+\end{document}

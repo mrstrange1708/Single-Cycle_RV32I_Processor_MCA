@@ -1,0 +1,25 @@
+[*] Member 2 ALU view: the playbook's first seven test vectors.
+[*] Supply sim/alu.vcd on the GTKWave command line; no machine-specific paths.
+[timestart] 0
+[size] 1280 560
+*-14.600000 65000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 150
+[signals_width] 220
+[sst_expanded] 1
+[sst_vpaned_height] 160
+@22
+[color] 1
+tb_alu.a[31:0]
+[color] 2
+tb_alu.b[31:0]
+@28
+[color] 3
+tb_alu.alu_ctrl[2:0]
+@22
+[color] 4
+tb_alu.result[31:0]
+@28
+[color] 5
+tb_alu.zero
+@24
+tb_alu.errors[31:0]

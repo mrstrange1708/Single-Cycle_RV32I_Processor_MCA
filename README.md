@@ -15,7 +15,7 @@ ADD, SUB, AND, OR, XOR, ADDI, LW, SW, BEQ and BNE.
 
 ## Demo video
 
-<paste YouTube / Drive link>
+https://drive.google.com/file/d/1b6oveIinmT06Y5jlJ1lN4a4wFFnF03fZ/view?usp=sharing
 
 ## Report
 
@@ -109,5 +109,5 @@ git push
 - [x] Program B (loop) passes on the full CPU
 - [x] Datapath diagram, control table and waveform screenshots in docs/
 - [x] Report PDF (report/report.pdf, built from report/main.tex)
-- [ ] Demo video link
+- [x] Demo video link
 - [ ] Synthesis results (Phase II)

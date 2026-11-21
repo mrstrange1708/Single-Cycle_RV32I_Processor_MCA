@@ -11,6 +11,7 @@ alu_sim
 *.log
 # Phase II generated files
 syn/program.hex
+syn/*.json
 syn/*.rpt
 syn/*.log
 syn/.Xil/

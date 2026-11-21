@@ -1,0 +1,8 @@
+# Open-source synthesis for a Lattice ECP5 FPGA (Member 1).
+# Writes cpu_ecp5.json, the netlist nextpnr-ecp5 places and routes.
+# Run from the syn/ folder:
+#   cp ../programs/test_all.hex program.hex
+#   yosys -s synth_ecp5.ys | tee yosys_ecp5.log
+read_verilog ../rtl/*.v
+synth_ecp5 -top cpu -json cpu_ecp5.json
+stat

@@ -50,7 +50,7 @@ module cpu (
 
     // ---- Debug outputs ----
     // Synthesis deletes any logic whose value never reaches an output pin.
-    // Without these, Vivado would optimise the whole CPU away.
+    // Without these, synthesis would optimise the whole CPU away.
     assign dbg_pc        = pc_cur;
     assign dbg_result    = result;
     assign dbg_reg_write = reg_write;

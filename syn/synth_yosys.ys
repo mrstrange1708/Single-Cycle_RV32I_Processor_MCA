@@ -1,5 +1,5 @@
 # Open-source synthesis (Member 1). Gives resource counts for a Xilinx 7-series
-# FPGA, the same family Vivado targets. Run from the syn/ folder:
+# FPGA, a cross-check for the ECP5 flow (synth_ecp5.ys). Run from the syn/ folder:
 #   cp ../programs/test_all.hex program.hex
 #   yosys -s synth_yosys.ys | tee yosys.log
 read_verilog ../rtl/pc.v ../rtl/alu.v ../rtl/regfile.v ../rtl/immgen.v

@@ -33,7 +33,8 @@ tb/         testbenches        (tb_alu.v tb_regfile.v tb_control.v tb_cpu.v tb_c
             + run scripts      (run_alu.sh run_control.sh run_cpu.sh)
 programs/   test programs      (test_all.s/.hex = Program A, sum_loop.s/.hex = Program B)
 sim/        run simulations here (outputs are not committed)
-docs/       datapath.png, control_table.md, waveforms/ screenshots per module
+syn/        synthesis scripts  (synth_ecp5.ys = Lattice ECP5, synth_yosys.ys = Xilinx cross-check)
+docs/       datapath.png, control_table.md, synthesis.md, waveforms/ screenshots per module
 report/     main.tex + section fragments, references (.bib), report.pdf
 ```
 
@@ -92,6 +93,20 @@ gtkwave cpu.vcd
 
 A warning like "Not enough words in the file for $readmemh" is normal: the program is shorter than the 64-word memory.
 
+## Synthesis
+
+Open-source flow (runs on macOS): Yosys + nextpnr from
+[OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build/releases), target Lattice ECP5 LFE5U-25F.
+
+```
+cd syn
+cp ../programs/test_all.hex program.hex
+yosys -s synth_ecp5.ys | tee yosys_ecp5.log
+nextpnr-ecp5 --25k --package CABGA381 --json cpu_ecp5.json --freq 50 --report nextpnr_report.json 2>&1 | tee nextpnr.log
+```
+
+Result: Fmax 64.18 MHz (clock period 15.58 ns). Full tables and the critical path: [docs/synthesis.md](docs/synthesis.md).
+
 ## Git workflow
 
 ```
@@ -110,4 +125,4 @@ git push
 - [x] Datapath diagram, control table and waveform screenshots in docs/
 - [x] Report PDF (report/report.pdf, built from report/main.tex)
 - [x] Demo video link
-- [ ] Synthesis results (Phase II)
+- [x] Synthesis results (Phase II)

@@ -5,14 +5,9 @@ sim/*
 *.out
 cpu_sim
 alu_sim
-# Vivado (Phase II)
-.Xil/
-*.jou
 *.log
 # Phase II generated files
 syn/program.hex
 syn/*.json
-syn/*.rpt
 syn/*.log
-syn/.Xil/
 __pycache__/

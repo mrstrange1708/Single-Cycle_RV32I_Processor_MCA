@@ -9,3 +9,9 @@ alu_sim
 .Xil/
 *.jou
 *.log
+# Phase II generated files
+syn/program.hex
+syn/*.rpt
+syn/*.log
+syn/.Xil/
+__pycache__/

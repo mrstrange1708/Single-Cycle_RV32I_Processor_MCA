@@ -1,8 +1,13 @@
 `timescale 1ns/1ps
 // Owner: Member 1. Top level: connects every block into the datapath.
+// Phase II: three debug outputs added so synthesis has something observable
+// to keep. Testbenches connect ports by name, so they need no change.
 module cpu (
-    input clk,
-    input reset
+    input         clk,
+    input         reset,
+    output [31:0] dbg_pc,          // current PC
+    output [31:0] dbg_result,      // value being written back
+    output        dbg_reg_write    // 1 when a register is written this cycle
 );
     // All the wires that run between blocks (names match the datapath diagram)
     wire [31:0] pc_cur, pc_next, pc_plus4, pc_branch;
@@ -42,4 +47,11 @@ module cpu (
 
     // Write back: ResultSrc mux picks memory data (LW) or the ALU result
     assign result = result_src ? mem_rdata : alu_result;
+
+    // ---- Debug outputs ----
+    // Synthesis deletes any logic whose value never reaches an output pin.
+    // Without these, Vivado would optimise the whole CPU away.
+    assign dbg_pc        = pc_cur;
+    assign dbg_result    = result;
+    assign dbg_reg_write = reg_write;
 endmodule
